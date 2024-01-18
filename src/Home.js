@@ -7,9 +7,11 @@ function Home({ homes, people }) {
     let homeItems = homes.map((home) => { return <HomeObject home={home} people={people} /> })
 
     return (
-        <div className="Home">
+        <div class="home">
             <h1>Homes and their residents</h1>
-            {homeItems}
+            <div id="home-object-container">
+                {homeItems}
+            </div>
             <ManagePerson homes={homes} people={people} />
         </div>
     );

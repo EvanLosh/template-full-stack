@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import './App.css';
 // import Component from './Component'
 import Home from './Home'
 import About from './About'
@@ -57,7 +56,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div class="App">
       <Header />
       <RouterProvider router={router} />
     </div>

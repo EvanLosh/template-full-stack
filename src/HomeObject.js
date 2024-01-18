@@ -4,12 +4,12 @@ import React, { useState, useEffect } from 'react';
 function HomeObject({ home, people }) {
 
     let peopleNodes = people.filter((person) => { return person.home_id === home.id }).map((person) => {
-        return <p classname="preson-name">{person.name}</p>
+        return <p class="preson-name">{person.name}</p>
     })
 
     return (
-        <div className="HomeObject">
-            <h3 classname="address">{home.address}</h3>
+        <div class="homeObject">
+            <h3 class="address">{home.address}</h3>
             {peopleNodes}
         </div>
     );
