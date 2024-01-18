@@ -8,9 +8,13 @@ body {
   max-width: 1000px;
 }
 
-code {
+code,
+.code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  background-color: rgb(76, 76, 76);
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .header {
@@ -53,6 +57,6 @@ code {
   margin: auto;
   width: 500px;
   padding: 30px;
-  padding-right: 150px;
+  padding-right: 250px;
   padding-bottom: 300px;
 }
