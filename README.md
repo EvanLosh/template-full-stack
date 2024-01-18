@@ -6,8 +6,6 @@ Use this project as a starting point for developing any new web app.
 
 ## Get started
 
-Fork this repository and give it a new name.
-
 In the project directory, you can run:
 
 ### `npm install`

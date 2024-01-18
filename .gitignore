@@ -6,6 +6,9 @@
 .pnp.js
 Pipfile.lock
 package-lock.json
+server/app.db
+server/migrations
+server/__pycache__
 
 # testing
 /coverage

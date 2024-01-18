@@ -17,3 +17,45 @@ metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 
 # Define model classes
+class Person(db.Model, SerializerMixin):
+    __tablename__ = 'people'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    home_id = db.Column(db.Integer, db.ForeignKey('homes.id'))
+
+    # Add relationship
+    home = db.relationship('Home', back_populates = 'people')
+    # Add serialization rules
+    serialize_rules = ('-home.people',)
+    # Validate data
+    @validates('name')
+    def validate_name(self, key, value):
+        if isinstance(value, str) and len(value) > 0:
+            return value
+        else:
+            raise ValueError('invalid name')
+    
+    def __repr__(self):
+        return f'<Person {self.id}: {self.name}>'
+    
+class Home(db.Model, SerializerMixin):
+    __tablename__ = 'homes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.String)
+
+    # Add relationship
+    people = db.relationship('Person', back_populates = 'home')
+    # Add serialization rules
+    serialize_rules = ('-people.home',)
+    # Validate data
+    @validates('address')
+    def validate_address(self, key, value):
+        if isinstance(value, str) and len(value) > 0:
+            return value
+        else:
+            raise ValueError('invalid address')
+
+    def __repr__(self):
+        return f'<Home {self.id}: {self.address}>'
