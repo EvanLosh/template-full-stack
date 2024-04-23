@@ -1,26 +1,86 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.orm import validates
+from sqlalchemy.orm import validates, backref
+from datetime import datetime, timezone
 
 db = SQLAlchemy()
 
-# Models 
 
-class User(db.Model, SerializerMixin):
-    __tablename__ = 'users'
+class Patient(db.Model, SerializerMixin):
+    __tablename__ = 'patients'
    
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.VARCHAR(20), nullable=False)
+    name = db.Column(db.String(20), nullable=False)
+    dob = db.Column(db.String(20), nullable=False)
+    datetime_created = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+
+    appointments = db.relationship('Appointment', back_populates='patient')
     
-    # serialize_rules = ()
+    serialize_rules = (
+        "appointments.patient",
+        "appointments.provider",
+        )
     
     def __repr__(self):
-        return f'User(id={self.id}, username={self.username})'
+        return f'User(id={self.id}, name={self.name}, DOB={self.dob})'
 
-    @validates('username')
-    def validates_username(self, key, value):
+    @validates('name')
+    def validate_name(self, key, value):
         if not value:
-            raise ValueError('Invalid username')
-        if len(value) > 20:
-            raise ValueError('Username cannot exceed 20 characters')
+            raise ValueError('Invalid namename')
+        if 1 > len(value) > 100:
+            raise ValueError('Name length must be between 1 and 100 characters')
+        if ',' in value or '\\' in value or '/' in value or ';' in value or "{" in value or "}" in value:
+            return ValueError('Names cannot contain commas, semicolons, slashes, and brackets')
         return value
+    
+    @validates('dob')
+    def validate_dob(self, key, value):
+        if not value:
+            raise ValueError('Invalid date of birth')
+        return value
+    
+class Provider(db.Model, SerializerMixin):
+    __tablename__ = 'providers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    npi = db.Column(db.String(150))
+    name = db.Column(db.String(100))
+    datetime_created = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+
+    appointments = db.relationship('Appointment', back_populates="provider")
+
+    serialize_rules = (
+        "appointments.patient",
+        "appointments.provider",
+        )
+
+    def __repr__(self):
+        return f'Post(id={self.id} name={self.name} NPI={self.npi})'
+    
+    
+class Appointment(db.Model, SerializerMixin):
+    __tablename__ = 'appointments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(db.Integer,  db.ForeignKey('patients.id'), nullable=False)
+    provider_id = db.Column(db.Integer,  db.ForeignKey('providers.id'), nullable=False)
+    location = db.Column(db.String(10000))
+    datetime_created = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    appointment_datetime = db.Column(db.DateTime)
+    status = (db.Column(db.String(100))) # Active or Canceled
+
+    patient = db.relationship("Patient", back_populates="appointments")
+    provider = db.relationship("Provider", back_populates="appointments")
+
+    serialize_rules = (
+        "patient.appointments",
+        "provider.appointments"
+        )
+
+
+    def __repr__(self):
+        return f'Comment(id={self.id} Patient={self.patient.name} Provider={self.provider.name}, Datetime={self.appointment_datetime})'
+    
+
+
