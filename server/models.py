@@ -43,8 +43,8 @@ class Patient(db.Model, SerializerMixin):
     appointments = db.relationship('Appointment', back_populates='patient')
     
     serialize_rules = (
-        "appointments.patient",
-        "appointments.provider",
+        "-appointments.patient",
+        "-appointments.provider",
         )
     
     def __repr__(self):
@@ -77,8 +77,8 @@ class Provider(db.Model, SerializerMixin):
     appointments = db.relationship('Appointment', back_populates="provider")
 
     serialize_rules = (
-        "appointments.patient",
-        "appointments.provider",
+        "-appointments.patient",
+        "-appointments.provider",
         )
 
     def __repr__(self):
@@ -100,8 +100,8 @@ class Appointment(db.Model, SerializerMixin):
     provider = db.relationship("Provider", back_populates="appointments")
 
     serialize_rules = (
-        "patient.appointments",
-        "provider.appointments"
+        "-patient.appointments",
+        "-provider.appointments"
         )
 
 

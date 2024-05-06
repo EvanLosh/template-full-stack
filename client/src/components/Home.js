@@ -7,7 +7,15 @@ function Home({ commonProps }) {
     const [appointments, setAppointments] = useState([])
 
     useEffect(() => {
-        fetch(commonProps.serverURL + "/appointments")
+        fetch(commonProps.serverURL + "/appointments",
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': "Bearer " + commonProps.getAccessToken(),
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
             .then(r => r.json())
             .then(r => {
                 console.log(r)

@@ -17,14 +17,9 @@ const blankUser = {
 
 function App() {
 
-  function getAccessToken() {
+  const getAccessToken = () => {
     const authJWTString = localStorage.getItem('access_token')
-    if (authJWTString) {
-      return authJWTString
-    }
-    else {
-      return null
-    }
+    return authJWTString
   }
 
   function setAccessToken(x) {
@@ -53,37 +48,14 @@ function App() {
     localStorage.setItem('localUser', JSON.stringify(localUser))
   }
 
-  function login(user) {
-    // user is a object with credentials
-    // Send the credentials to the server for verification
-    fetch(commonProps.serverURL + '/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then(r => r.json())
-      .then(data => {
-        if ('access_token' in data) {
-          // user's credentials waere verified by the server
-          // save user in localStorage, save access token in localStorage, and set user state
-          setLocalUser(data.user)
-          setAccessToken(data.access_token)
-          setUser(data.user)
-        }
-
-        else {
-          console.log('login failed')
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+  function handleLogin(data) {
+    setLocalUser(data.user)
+    setAccessToken(data.access_token)
+    setUser(data.user)
   }
 
 
-  function logout() {
+  function handleLogout() {
     setLocalUser(blankUser)
     setUser(getLocalUser())
     window.location.reload()
@@ -105,6 +77,7 @@ function App() {
     serverURL: serverURL,
     websiteURL: websiteURL,
     user: user,
+    getAccessToken: getAccessToken,
   }
 
   // Define the React router
@@ -116,7 +89,7 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login commonProps={commonProps} login={login} logout={logout} />,
+      element: <Login commonProps={commonProps} handleLogin={handleLogin} handleLogout={handleLogout} />,
       children: [],
     },
     {
@@ -131,7 +104,7 @@ function App() {
   return (
     <div id="app">
       <h1>App.js</h1>
-      <Header commonProps={commonProps} />
+      <Header commonProps={commonProps} handleLogout={handleLogout} />
       <RouterProvider router={router} />
     </div>
   );

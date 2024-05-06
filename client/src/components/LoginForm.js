@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik'
 
-function LoginForm({ commonProps }) {
+function LoginForm({ commonProps, handleLogin, handleLogout }) {
     const [loggingIn, setLoggingIn] = useState(true)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,6 +28,7 @@ function LoginForm({ commonProps }) {
                 .then(r => r.json())
                 .then(r => {
                     console.log('Success:', r);
+                    handleLogin(r)
                     formikLogin.resetForm();
                 })
         }
@@ -130,7 +131,6 @@ function LoginForm({ commonProps }) {
         <p onClick={(e) => setLoggingIn(true)}>Login</p>
         <p onClick={(e) => setLoggingIn(false)}>Sign up</p>
         {loggingIn ? displayLoginForm : signUpForm}
-
     </div>
 
     );
