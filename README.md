@@ -1,6 +1,8 @@
-# Full-stack project template
+# Full-stack web application template using React and Flask
 
-This template includes a working Flask server and databse with ORM. To use it, clone this repository, then copy the template into your new project directory
+This template includes a Flask server and databse with ORM and RESTful API. Users are authenticated at endpoints using password encryption stored as JWT in the client.  
+
+To use the template, clone this repository, then copy the template into your new project directory
 
 ```
     cp -r /template-full-stack/* /new-project/
@@ -17,16 +19,12 @@ In the client directory, run
 In the project directory, run
 
 ```
-    pipenv install
-    pipenv shell
-```
-
-In the server directory, run
-
-```
-    flask db init
-    flask db migrate -m "initial migration"
-    flask db upgrade head
-    python seed.py
-    python app.py
+    $ pipenv install
+    $ pipenv shell
+    $ cd server
+    /server$ flask db init
+    /server$ flask db migrate -m "initial migration"
+    /server$ flask db upgrade head
+    /server$ python seed.py
+    /server$ python app.py
 ```

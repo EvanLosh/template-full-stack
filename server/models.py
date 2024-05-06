@@ -2,9 +2,35 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.orm import validates, backref
 from datetime import datetime, timezone
+import bcrypt
 
 db = SQLAlchemy()
 
+
+class User(db.Model, SerializerMixin):
+    __tablename__ = 'users'
+   
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), nullable=False)
+    password_hash = db.Column(db.String(100), nullable=False)
+    datetime_created = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+
+    def __repr__(self):
+        return f'User(id={self.id}, username={self.username})'
+    
+    def verify_password(self, password):
+        password_bytes = password.encode('utf-8')
+        return bcrypt.checkpw(password_bytes, self.password_hash)
+    
+    def generate_session_data(self):
+        userdata = {
+            'username': self.username,
+            'password': str(self.password_hash),
+            'id': self.id,
+            'datetime_created': str(self.datetime_created),
+            'datetime_session_start': str(datetime.now(timezone.utc))
+        }
+        return userdata
 
 class Patient(db.Model, SerializerMixin):
     __tablename__ = 'patients'
@@ -68,7 +94,7 @@ class Appointment(db.Model, SerializerMixin):
     location = db.Column(db.String(10000))
     datetime_created = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     appointment_datetime = db.Column(db.DateTime)
-    status = (db.Column(db.String(100))) # Active or Canceled
+    status = (db.Column(db.String(100))) # "Active" or "Canceled"
 
     patient = db.relationship("Patient", back_populates="appointments")
     provider = db.relationship("Provider", back_populates="appointments")

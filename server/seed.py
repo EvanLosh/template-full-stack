@@ -6,10 +6,11 @@ import random
 import math
 # Remote library imports
 from faker import Faker
+import bcrypt
 
 # Local imports
 from app import app
-from models import db, Patient, Provider, Appointment
+from models import db, Patient, Provider, Appointment, User
 
 fake = Faker()
 
