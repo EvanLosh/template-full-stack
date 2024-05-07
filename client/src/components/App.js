@@ -58,6 +58,7 @@ function App() {
   function handleLogout() {
     setLocalUser(blankUser)
     setUser(getLocalUser())
+    // render user's access token invalid
     window.location.reload()
   }
 

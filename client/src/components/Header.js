@@ -6,16 +6,29 @@ function Header({ commonProps, handleLogout }) {
 
 
 
-    return <div id="header">
-        <h1>Header.js</h1>
-        <a href='/'><p>Home</p></a>
-        <a href='/about'><p>About</p></a>
-        {
-            commonProps.user.id > 0 ?
-                <p onClick={handleLogout}>Logout</p>
-                :
-                <a href='/login'><p>Login</p></a>
-        }
+    return <div id="header" className="bg-blue-500 text-white p-4">
+        <h1 className="text-2xl">Header.js</h1>
+
+        <nav className="bg-blue-500 p-4">
+            <div className="container mx-auto">
+
+                <div className="flex justify-between items-center">
+
+                    <div className="text-white font-bold text-xl">My Website</div>
+
+                    <div className="hidden md:flex space-x-4">
+                        <a href='/' className="text-white hover:text-gray-300"><p>Home</p></a>
+                        <a href='/about' className="text-white hover:text-gray-300"><p>About</p></a>
+                        {
+                            commonProps.user.id > 0 ?
+                                <p onClick={handleLogout} className="text-white hover:text-gray-300">Logout</p>
+                                :
+                                <a href='/login' className="text-white hover:text-gray-300"><p>Login</p></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>;
 }
 
