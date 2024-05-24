@@ -4,7 +4,6 @@ function About() {
 
     return (
         <div id="About">
-            <h1>About.js</h1>
             <p>To use Tailwind CSS, use VS Code with the Tailwind CSS Intellisense extension.</p>
             <p>To start the back end, in the project directory:</p>
             <p>$ pipenv install</p>

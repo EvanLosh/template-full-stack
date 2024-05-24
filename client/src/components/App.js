@@ -104,7 +104,6 @@ function App() {
 
   return (
     <div id="app">
-      <h1>App.js</h1>
       <Header commonProps={commonProps} handleLogout={handleLogout} />
       <RouterProvider router={router} />
     </div>

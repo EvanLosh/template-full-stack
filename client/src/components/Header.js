@@ -7,7 +7,7 @@ function Header({ commonProps, handleLogout }) {
 
 
     return <div id="header" className="bg-blue-500 text-white p-4">
-        <h1 className="text-2xl">Header.js</h1>
+        {/* <h1 className="text-2xl">Header.js</h1> */}
 
         <nav className="bg-blue-500 p-4">
             <div className="container mx-auto">

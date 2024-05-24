@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik'
+import "./LoginForm.css"
 
 function LoginForm({ commonProps, handleLogin, handleLogout }) {
     const [loggingIn, setLoggingIn] = useState(true)
@@ -56,21 +57,27 @@ function LoginForm({ commonProps, handleLogin, handleLogout }) {
     const loginForm = <div>
 
         <form onSubmit={formikLogin.handleSubmit}>
-            <label htmlFor="username">Username:</label>
-            <input
-                type="text"
-                name="username"
-                onChange={formikLogin.handleChange}
-                value={formikLogin.values.username}
-            />
+            <div className="form-line">
+
+                <label htmlFor="username">Username:</label>
+                <input
+                    type="text"
+                    name="username"
+                    onChange={formikLogin.handleChange}
+                    value={formikLogin.values.username}
+                />
+            </div>
             <br></br>
-            <label htmlFor="password">Password:</label>
-            <input
-                type="text"
-                name="password"
-                onChange={formikLogin.handleChange}
-                value={formikLogin.values.password}
-            />
+            <div className="form-line">
+
+                <label htmlFor="password">Password:</label>
+                <input
+                    type="text"
+                    name="password"
+                    onChange={formikLogin.handleChange}
+                    value={formikLogin.values.password}
+                />
+            </div>
             <br></br>
             {/* <label htmlFor="email">Email (not required):</label>
         <input
@@ -80,7 +87,10 @@ function LoginForm({ commonProps, handleLogin, handleLogout }) {
             value={formikLogin.values.email}
         />
         <br></br> */}
-            <input className='submit button' type="submit" value="Login" />
+            <div >
+
+                <input className='submit button clickable' type="submit" value="Submit" />
+            </div>
         </form>
     </div>
 
@@ -95,41 +105,70 @@ function LoginForm({ commonProps, handleLogin, handleLogout }) {
 
     const signUpForm = <div>
         <form onSubmit={formikSignUp.handleSubmit}>
-            <label htmlFor="username">Username:</label>
-            <input
-                type="text"
-                name="username"
-                onChange={formikSignUp.handleChange}
-                value={formikSignUp.values.username}
-            />
+            <div className="form-line">
+
+                <label htmlFor="username">Username:</label>
+                <input
+                    type="text"
+                    name="username"
+                    onChange={formikSignUp.handleChange}
+                    value={formikSignUp.values.username}
+                />
+            </div>
             <br></br>
-            <label htmlFor="password">Password:</label>
-            <input
-                type="text"
-                name="password"
-                onChange={formikSignUp.handleChange}
-                value={formikSignUp.values.password}
-            />
+            <div className="form-line">
+
+                <label htmlFor="password">Password:</label>
+                <input
+                    type="text"
+                    name="password"
+                    onChange={formikSignUp.handleChange}
+                    value={formikSignUp.values.password}
+                />
+            </div>
             <br></br>
-            <label htmlFor="email">Email:</label>
-            <input
-                type="text"
-                name="email"
-                onChange={formikSignUp.handleChange}
-                value={formikSignUp.values.email}
-            />
+            <div className="form-line">
+
+                <label htmlFor="email">Email:</label>
+                <input
+                    type="text"
+                    name="email"
+                    onChange={formikSignUp.handleChange}
+                    value={formikSignUp.values.email}
+                />
+            </div>
             <br></br>
             {signUpSuccessMessage}
-            <input className='submit button' type="submit" value="Sign up" />
+            <div >
+
+                <input className='submit button clickable' type="submit" value="Submit" />
+            </div>
         </form>
     </div>
 
 
 
-    return (<div>
-        <p>LoginForm.js</p>
-        <p onClick={(e) => setLoggingIn(true)}>Login</p>
-        <p onClick={(e) => setLoggingIn(false)}>Sign up</p>
+    return (<div id="login-form">
+        {loggingIn
+            ?
+            <div className="login-or-sign-up-selection">
+                <div className="inactive clickable">
+                    <p onClick={(e) => setLoggingIn(false)}>Sign up</p>
+                </div>
+                <div>
+                    <p >Login</p>
+                </div>
+            </div>
+            :
+            <div className="login-or-sign-up-selection">
+                <div>
+                    <p >Sign up</p>
+                </div>
+                <div className="inactive clickable">
+                    <p onClick={(e) => setLoggingIn(true)}>Login</p>
+                </div>
+            </div>
+        }
         {loggingIn ? displayLoginForm : signUpForm}
     </div>
 

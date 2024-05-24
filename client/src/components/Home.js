@@ -28,7 +28,7 @@ function Home({ commonProps }) {
 
     return (
         <div id="home">
-            <h1>Home.js</h1>
+
             <p>This box is an example of CSS gradients, animations, masks, and text effects.</p>
             <div id="fancy-css-example-container">
 

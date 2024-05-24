@@ -15,3 +15,31 @@
   --header: #333;
   --text: #333;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+form .form-line {
+  display: flex;
+}
+
+form .form-line label {
+  width: 30%;
+}
+
+form .form-line input {
+  width: 70%;
+}
+
+input {
+  border-left: solid;
+  border-bottom: solid;
+  border-color: gray;
+  margin: 5px;
+}
+
+
+label {
+  margin: 5px;
+}
