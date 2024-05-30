@@ -5,14 +5,25 @@ function AppointmentList({ commonProps, appointments }) {
 
 
 
-    // const appointmentComponents = appointments.map(a => {
-    //     return <Appointment appointment={a} commonProps={commonProps} />
-    // })
+    const appointmentCards = appointments.map(a => {
+        return <Appointment key={a.id} appointment={a} commonProps={commonProps} />
+    })
 
     return (
         <div id="appointment-list">
             <h1>AppointmentList.js</h1>
-            {/* {appointmentComponents} */}
+            <table>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Patient DOB</th>
+                    <th>Datetime</th>
+                    <th>Provider</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                </tr>
+
+                {appointmentCards}
+            </table>
         </div>
     );
 }
