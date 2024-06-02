@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Header.css"
 
 
-function Header({ commonProps, handleLogout }) {
+function Header({ commonProps, logout }) {
 
 
 
@@ -21,7 +21,7 @@ function Header({ commonProps, handleLogout }) {
                         <a href='/about' className="text-white hover:text-gray-300"><p>About</p></a>
                         {
                             commonProps.user.id > 0 ?
-                                <p onClick={handleLogout} className="text-white hover:text-gray-300">Logout</p>
+                                <p onClick={logout} className="text-white hover:text-gray-300">Logout</p>
                                 :
                                 <a href='/login' className="text-white hover:text-gray-300"><p>Login</p></a>
                         }

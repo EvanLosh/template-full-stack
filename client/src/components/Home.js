@@ -5,6 +5,7 @@ import AppointmentList from "./AppointmentList.js";
 function Home({ commonProps }) {
 
     const [appointments, setAppointments] = useState([])
+    let authorized = false
 
     useEffect(() => {
         fetch(commonProps.serverURL + "/appointments",
@@ -16,10 +17,18 @@ function Home({ commonProps }) {
                 }
             }
         )
-            .then(r => r.json())
+            .then(r => {
+                return r.json()
+            })
             .then(r => {
                 console.log(r)
-                setAppointments(r)
+                if (r.constructor === Array) {
+                    setAppointments(r)
+                }
+                if ('msg' in r) {
+                    // handle bad response from server
+                    // e.g. auth token expired -> tell the user to logout
+                }
             }
             )
     }
@@ -29,15 +38,7 @@ function Home({ commonProps }) {
     return (
         <div id="home">
 
-            <p>This box is an example of CSS gradients, animations, masks, and text effects.</p>
-            <div id="fancy-css-example-container">
 
-                <div id="masked"></div>
-                <div id="mask">
-                    <div id="css-blurry">=====</div>
-                </div>
-
-            </div>
             <AppointmentList commonProps={commonProps} appointments={appointments} />
 
         </div>

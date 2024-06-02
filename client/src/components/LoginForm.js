@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik'
 import "./LoginForm.css"
 
-function LoginForm({ commonProps, handleLogin, handleLogout }) {
+function LoginForm({ commonProps, login, logout }) {
     const [loggingIn, setLoggingIn] = useState(true)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -10,7 +10,7 @@ function LoginForm({ commonProps, handleLogin, handleLogout }) {
 
     const initialValues = { username: "", password: "" }
 
-    // const handleLogin = (e) => {
+    // const login = (e) => {
     //     e.preventDefault();
     //     // Add your login logic here (e.g., API call, authentication, etc.)
     //     console.log('Logging in with:', email, password);
@@ -29,7 +29,7 @@ function LoginForm({ commonProps, handleLogin, handleLogout }) {
                 .then(r => r.json())
                 .then(r => {
                     console.log('Success:', r);
-                    handleLogin(r)
+                    login(r)
                     formikLogin.resetForm();
                 })
         }

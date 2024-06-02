@@ -4,20 +4,15 @@ function Appointment({ commonProps, appointment }) {
 
 
     return (
-        <tr>
-            <td>{appointment.patient.name}</td>
-            <td>{appointment.patient.dob}</td>
-            <td>{appointment.appointment_datetime}</td>
-            <td>{appointment.provider.name}</td>
-            <td>{appointment.location}</td>
-            <td>{appointment.status}</td>
+        <tr className="appointment-data-row">
+            <td>{appointment['patientName']}</td>
+            <td>{appointment['patientDOB']}</td>
+            <td>{appointment['appointment_datetime']}</td>
+            <td>{appointment['providerName']}</td>
+            <td>{appointment['location']}</td>
+            <td>{appointment['status']}</td>
         </tr>
 
-
-        // <div className="appointment">
-
-        //     <h1>Appointment.js</h1>
-        // </div>
     );
 }
 

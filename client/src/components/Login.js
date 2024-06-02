@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import LoginForm from "./LoginForm.js"
 
-function Login({ commonProps, handleLogin, handleLogout }) {
+function Login({ commonProps, login, logout }) {
 
 
 
     return (
         <div id="Login">
 
-            <LoginForm commonProps={commonProps} handleLogin={handleLogin} handleLogout={handleLogout} />
+            <LoginForm commonProps={commonProps} login={login} logout={logout} />
 
         </div>
     );

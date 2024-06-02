@@ -39,7 +39,6 @@ function App() {
 
   const [user, setUser] = useState(getLocalUser)
 
-
   function setLocalUser(user) {
     const localUser = {
       username: user.username,
@@ -48,18 +47,22 @@ function App() {
     localStorage.setItem('localUser', JSON.stringify(localUser))
   }
 
-  function handleLogin(data) {
+  function login(data) {
     setLocalUser(data.user)
     setAccessToken(data.access_token)
     setUser(data.user)
   }
 
-
-  function handleLogout() {
+  function logout() {
     setLocalUser(blankUser)
     setUser(getLocalUser())
-    // render user's access token invalid
+    localStorage.removeItem('access_token')
     window.location.reload()
+  }
+
+  function handleUnauthorizedResponse() {
+    //this function should be called whenever the user is logged in and gets unauthorized response (401) from the server
+    
   }
 
   // When App.js mounts, retrieve the user from local storage 
@@ -90,7 +93,7 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login commonProps={commonProps} handleLogin={handleLogin} handleLogout={handleLogout} />,
+      element: <Login commonProps={commonProps} login={login} logout={logout} />,
       children: [],
     },
     {
@@ -104,7 +107,7 @@ function App() {
 
   return (
     <div id="app">
-      <Header commonProps={commonProps} handleLogout={handleLogout} />
+      <Header commonProps={commonProps} logout={logout} />
       <RouterProvider router={router} />
     </div>
   );
