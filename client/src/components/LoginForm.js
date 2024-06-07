@@ -89,7 +89,7 @@ function LoginForm({ commonProps, login, logout }) {
         <br></br> */}
             <div >
 
-                <input className='submit button clickable' type="submit" value="Submit" />
+                <input className='submit button clickable' type="submit" value="Login" />
             </div>
         </form>
     </div>
@@ -141,36 +141,41 @@ function LoginForm({ commonProps, login, logout }) {
             {signUpSuccessMessage}
             <div >
 
-                <input className='submit button clickable' type="submit" value="Submit" />
+                <input className='submit button clickable' type="submit" value="Sign up" />
             </div>
         </form>
     </div>
 
 
 
-    return (<div id="login-form">
-        {loggingIn
-            ?
-            <div className="login-or-sign-up-selection">
-                <div className="inactive clickable">
-                    <p onClick={(e) => setLoggingIn(false)}>Sign up</p>
-                </div>
-                <div>
-                    <p >Login</p>
-                </div>
+    return (
+        <div>
+            <div id='login-form-top-part'>
+                {loggingIn
+                    ?
+                    <div className="login-or-sign-up-selection">
+                        <div className="inactive clickable">
+                            <p onClick={(e) => setLoggingIn(false)}>Sign up</p>
+                        </div>
+                        <div>
+                            <p >Login</p>
+                        </div>
+                    </div>
+                    :
+                    <div className="login-or-sign-up-selection">
+                        <div>
+                            <p >Sign up</p>
+                        </div>
+                        <div className="inactive clickable">
+                            <p onClick={(e) => setLoggingIn(true)}>Login</p>
+                        </div>
+                    </div>
+                }
             </div>
-            :
-            <div className="login-or-sign-up-selection">
-                <div>
-                    <p >Sign up</p>
-                </div>
-                <div className="inactive clickable">
-                    <p onClick={(e) => setLoggingIn(true)}>Login</p>
-                </div>
+            <div id="login-form">
+                {loggingIn ? displayLoginForm : signUpForm}
             </div>
-        }
-        {loggingIn ? displayLoginForm : signUpForm}
-    </div>
+        </div>
 
     );
 }

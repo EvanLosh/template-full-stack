@@ -2,11 +2,30 @@
 #login-form{
     margin: auto;
     width: 400px;
-    margin-top: 100px;
+    padding-top: 20px;
+    border-left: solid;
+    border-bottom: solid;
+    border-right: solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: white;
+    height: 300px;
 }
 
 #login-form * {
     background-color: white;
+
+}
+
+#login-form-top-part {
+    margin: auto;
+    width: 400px;
+    margin-top: 100px;
+}
+
+#login-form-top-part * {
+    background-color: white;
+    margin-bottom: 0;
 }
 
 .login-or-sign-up-selection {
@@ -22,10 +41,14 @@
     border-bottom: none;
     margin-bottom: 20px;
     display: flex;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .login-or-sign-up-selection div.inactive {
-    color: rgb(167, 167, 167);
+    color: rgb(160, 160, 160);
+    border-bottom: solid;
+    border-bottom-color: black;
 }
 
 .login-or-sign-up-selection div p {

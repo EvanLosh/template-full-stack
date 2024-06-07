@@ -5,7 +5,7 @@ import "./App.css";
 import Header from "./Header";
 import Login from "./Login";
 import About from "./About";
-import AppointmentList from "./AppointmentList";
+import Appointments from "./Appointments";
 
 const serverURL = "http://127.0.0.1:5000";
 const websiteURL = "http://127.0.0.1:3000"
@@ -62,7 +62,7 @@ function App() {
 
   function handleUnauthorizedResponse() {
     //this function should be called whenever the user is logged in and gets unauthorized response (401) from the server
-    
+
   }
 
   // When App.js mounts, retrieve the user from local storage 
@@ -89,6 +89,11 @@ function App() {
     {
       path: "/",
       element: <Home commonProps={commonProps} />,
+      children: [],
+    },
+    {
+      path: "/appointments",
+      element: <Appointments commonProps={commonProps} />,
       children: [],
     },
     {

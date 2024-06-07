@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# For convenience, this script deletes, recreates, and seeds the databse in a single command.
+
 # Delete the previous db
 rm -r ./instance
 rm -r ./migrations

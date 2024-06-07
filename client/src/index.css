@@ -19,6 +19,9 @@
 .clickable {
   cursor: pointer;
 }
+.clickable:hover {
+  background-color: yellow;
+}
 
 form .form-line {
   display: flex;
@@ -47,4 +50,39 @@ label {
 table, th, td {
   border: solid;
   padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  padding: 10px;
+  border: solid;
+  border-bottom-color: darkblue;
+  border-right-color: darkblue;
+  border-left-color: lightblue;
+  border-top-color: lightblue;
+  border-radius: 10px;
+}
+
+.code-block {
+  background-color:#333;
+  border-radius: 10px;
+  color: lightgreen;
+  padding: 15px;
+  margin: 10px;
+  font-family: monospace;
+}
+
+.collapse-button {
+  /* background-color: ; */
+}
+
+.collapse {
+  display: none;
+}
+
+.collapseable-headline {
+  display: flex;
 }
