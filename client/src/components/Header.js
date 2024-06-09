@@ -15,7 +15,7 @@ function Header({ commonProps, logout }) {
                 <div className="flex justify-between items-center">
 
                     <div className="text-white font-bold text-xl">
-                        <a href='/'>My Website</a>
+                        <a href='/'>Template Web Application</a>
                     </div>
 
                     <div className="hidden md:flex space-x-4">

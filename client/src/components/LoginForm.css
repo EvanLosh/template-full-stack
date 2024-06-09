@@ -1,7 +1,8 @@
 
 #login-form{
     margin: auto;
-    width: 400px;
+    height: 520px;
+    width: 480px;
     padding-top: 20px;
     border-left: solid;
     border-bottom: solid;
@@ -9,7 +10,7 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: white;
-    height: 300px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.2)
 }
 
 #login-form * {
@@ -17,9 +18,14 @@
 
 }
 
+#login-form > div > form {
+    width: 100%;
+    border: none;
+}
+
 #login-form-top-part {
     margin: auto;
-    width: 400px;
+    width: 480px;
     margin-top: 100px;
 }
 

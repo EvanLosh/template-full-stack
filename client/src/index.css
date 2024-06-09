@@ -24,15 +24,13 @@
 }
 
 form .form-line {
-  display: flex;
+  /* display: flex; */
 }
 
-form .form-line label {
-  width: 30%;
-}
-
-form .form-line input {
-  width: 70%;
+label {
+height: 50px;
+display: block;
+margin: 5px;
 }
 
 input {
@@ -42,9 +40,12 @@ input {
   margin: 5px;
 }
 
+form .form-line label {
+  width: 30%;
+}
 
-label {
-  margin: 5px;
+form .form-line input {
+  width: 70%;
 }
 
 table, th, td {
@@ -76,7 +77,15 @@ table, th, td {
 }
 
 .collapse-button {
-  /* background-color: ; */
+  scale: 3%;
+}
+
+.collapse-button.down {
+transform: rotate(270deg);
+}
+
+.collapse-button.right {
+  transform: rotate(180deg);
 }
 
 .collapse {
@@ -86,3 +95,4 @@ table, th, td {
 .collapseable-headline {
   display: flex;
 }
+

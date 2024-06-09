@@ -5,7 +5,7 @@ import AppointmentList from "./AppointmentList.js"
 function Appointments({ commonProps }) {
 
     const [appointments, setAppointments] = useState([])
-    let authorized = false
+    // let authorized = false
 
     useEffect(() => {
         fetch(commonProps.serverURL + "/appointments",

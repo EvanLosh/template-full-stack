@@ -93,19 +93,21 @@ function AppointmentList({ commonProps, appointments }) {
             </form>
 
             <p>Click on any column header to sort the table by that column</p>
+            <div className='block w-full overflow-x-auto'>
 
-            <table>
-                <tr>
-                    <th className='clickable' onClick={() => handleSort('patientName')}>Patient Name</th>
-                    <th className='clickable' onClick={() => handleSort('patientDOB')}>Patient DOB</th>
-                    <th className='clickable' onClick={() => handleSort('appointment_datetime')}>Appointment Datetime</th>
-                    <th className='clickable' onClick={() => handleSort('providerName')}>Provider Name</th>
-                    <th className='clickable' onClick={() => handleSort('location')}>Appointment Location</th>
-                    <th className='clickable' onClick={() => handleSort('status')}>Status</th>
-                </tr>
-                {appointmentCards}
+                <table>
+                    <tr>
+                        <th className='clickable' onClick={() => handleSort('patientName')}>Patient Name</th>
+                        <th className='clickable' onClick={() => handleSort('patientDOB')}>Patient DOB</th>
+                        <th className='clickable' onClick={() => handleSort('appointment_datetime')}>Appointment Datetime</th>
+                        <th className='clickable' onClick={() => handleSort('providerName')}>Provider Name</th>
+                        <th className='clickable' onClick={() => handleSort('location')}>Appointment Location</th>
+                        <th className='clickable' onClick={() => handleSort('status')}>Status</th>
+                    </tr>
+                    {appointmentCards}
 
-            </table>
+                </table>
+            </div>
         </div>
     );
 }

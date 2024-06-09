@@ -60,6 +60,8 @@ function App() {
     window.location.reload()
   }
 
+
+
   function handleUnauthorizedResponse() {
     //this function should be called whenever the user is logged in and gets unauthorized response (401) from the server
 
