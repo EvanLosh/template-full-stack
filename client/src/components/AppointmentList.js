@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Appointment from "./Appointment.js"
 import "./AppointmentList.css"
 
@@ -14,7 +14,8 @@ function AppointmentList({ commonProps, appointments }) {
         status: ''
     })
     const [hideSearch, setHideSearch] = useState(true)
-    // The search input values are not stored in a react state. If they were, this component would rerender upon every change of the input values, and the array of appointments would be fileterd and sorted every time. Instead, the user must press a button to update states. 
+
+    // The search input values are not stored in a react state. If they were, this component would rerender upon every change of the input values, and the array of appointments would be filtered and sorted every time. Instead, the user must press a button to filter appointments. 
     const appointmentCards = appointments.filter((a) => {
         return (
             a['patient']['name'].toUpperCase().includes((search['patientName']).toUpperCase()) &&
@@ -24,30 +25,33 @@ function AppointmentList({ commonProps, appointments }) {
             a['location'].toUpperCase().includes((search['location']).toUpperCase()) &&
             a['status'].toUpperCase().includes((search['status']).toUpperCase())
         )
-    }).map((appointment) => {
-        // The patient and provider objects are nested in the appointment object. To simplify the logic of the sort function, the appointment object is mapped to a nestless object before sorting. 
-        let normalizedAppointment = {}
-        normalizedAppointment['patientName'] = appointment['patient']['name']
-        normalizedAppointment['patientDOB'] = appointment['patient']['dob']
-        normalizedAppointment['appointment_datetime'] = appointment['appointment_datetime']
-        normalizedAppointment['providerName'] = appointment['provider']['name']
-        normalizedAppointment['location'] = appointment['location']
-        normalizedAppointment['status'] = appointment['status']
-        normalizedAppointment['id'] = appointment['id']
-        return normalizedAppointment
-    }).sort((a, b) => {
-        if (((typeof a[sort]) == "string") && ((typeof b[sort]) == "string")) {
-            if (a[sort].toUpperCase() < b[sort].toUpperCase()) {
-                return -1
-            } else {
-                return 1
-            }
-        } else {
-            return (a[sort] - b[sort])
-        }
-    }).map(a => {
-        return <Appointment key={a.id} appointment={a} commonProps={commonProps} />
     })
+        .map((appointment) => {
+            // The patient and provider objects are nested in the appointment object. To simplify the logic of the sort function, the appointment object is mapped to a nestless object before sorting. 
+            let normalizedAppointment = {}
+            normalizedAppointment['patientName'] = appointment['patient']['name']
+            normalizedAppointment['patientDOB'] = appointment['patient']['dob']
+            normalizedAppointment['appointment_datetime'] = appointment['appointment_datetime']
+            normalizedAppointment['providerName'] = appointment['provider']['name']
+            normalizedAppointment['location'] = appointment['location']
+            normalizedAppointment['status'] = appointment['status']
+            normalizedAppointment['id'] = appointment['id']
+            return normalizedAppointment
+        })
+        .sort((a, b) => {
+            if (((typeof a[sort]) == "string") && ((typeof b[sort]) == "string")) {
+                if (a[sort].toUpperCase() < b[sort].toUpperCase()) {
+                    return -1
+                } else {
+                    return 1
+                }
+            } else {
+                return (a[sort] - b[sort])
+            }
+        })
+        .map(a => {
+            return <Appointment key={a.id} appointment={a} commonProps={commonProps} />
+        })
 
     function handleSort(field) {
         setSort(field)
@@ -70,7 +74,7 @@ function AppointmentList({ commonProps, appointments }) {
 
     return (
         <div id="appointment-list">
-            <h1>Appointments</h1>
+            <h1>Table of Appointments</h1>
             <form onSubmit={handleSearchSubmit}>
                 <button className="button" onClick={() => setHideSearch(!hideSearch)}>{hideSearch ? "Show search criteria" : "Hide search criteria"}</button>
                 <div className={hideSearch ? 'hidden' : ''}>
@@ -86,7 +90,7 @@ function AppointmentList({ commonProps, appointments }) {
                     <input name='location'></input>
                     <label>Status</label>
                     <input name='status'></input>
-                    <input type='submit' className='clickable' value='Apply search criteria'></input>
+                    <input type='submit' className='clickable button' value='Apply search criteria'></input>
                 </div>
 
                 <p>Found {appointmentCards.length} matching results</p>
@@ -105,7 +109,7 @@ function AppointmentList({ commonProps, appointments }) {
                         <th className='clickable' onClick={() => handleSort('status')}>Status</th>
                     </tr>
                     {appointmentCards}
-
+                    { }
                 </table>
             </div>
         </div>

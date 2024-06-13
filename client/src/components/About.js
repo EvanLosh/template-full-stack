@@ -1,60 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function About() {
 
     const [featuresCollapsed, setFeaturesCollapsed] = useState(true)
     const [guideCollapsed, setGuideCollapsed] = useState(true)
 
-    function buttonContent(x) {
-        return x ? "Expand" : "Hide"
-    }
-
     return (
-        <div id="About">
-            <h1>This is a template project for web developers</h1>
+        <div id="About" className="w-1/2 m-auto">
+            <h1>This is a full-stack template project for web developers</h1>
             <p>This is an open source project meant to be used by anybody as a starting point for creating new web applications.</p>
-            <div className="collapseable ">
-                <div className="collapseable-headline">
+            <div className="collapseable mb-16 px-16 pt-4 pb-16 border-2 rounded ">
+                <span className="collapseable-headline clickable" onClick={() => setFeaturesCollapsed(!featuresCollapsed)}>
 
                     <img
                         src='/images/left-arrow-angle-svgrepo-com.svg'
                         alt={(featuresCollapsed ? "Expand" : "Collapse")}
                         className={"collapse-button " + (featuresCollapsed ? "right" : "down")}
-                        onClick={() => setFeaturesCollapsed(!featuresCollapsed)}>
+                    // onClick={() => setFeaturesCollapsed(!featuresCollapsed)}
+                    >
+
                     </img>
-                    <h3>The features of this template</h3>
-                </div>
-                <ol className={featuresCollapsed ? "collapse" : ""}>
-                    <li>A relational, structured database with tables for users, patients, doctors, and appointments</li>
-                    <li>A SQLAlchemy object-relationship mapping (ORM) defined in server/models.py</li>
+                    <h3 className='clickable'>The features of this template</h3>
+                </span>
+                <ol className={(featuresCollapsed ? "collapse " : " ") + "list-decimal"}>
+                    <li>A SQL database with a many-to-many relationship</li>
+                    <li>An ORM (object-relational mapping) in server/models.py</li>
                     <li>Serialized object relationships using SerializerMixin</li>
-                    <li>A Flask server application with a RESTful web API in server/app.py</li>
-                    <li>Endpoint protection using encrypted JWTs stored in the user's localStorage</li>
-                    <li>A React front-end with routing</li>
-                    <li>A login/sign up page for creating new users</li>
-                    <li>A table that fetches and displays appointments from the database</li>
+                    <li>A Flask server with a RESTful web API in server/app.py</li>
+                    <li>Endpoint protection using encrypted JWTs stored in the client's local storage</li>
+                    <li>A React front-end with router</li>
+                    <li>A login/sign up page</li>
+                    <li>A table that fetches and displays data from the database</li>
                     <li>The table data can be sorted and filtered</li>
                 </ol>
             </div>
 
-            <div className="collapseable ">
-                <div className="collapseable-headline">
+            <div className="collapseable m-4 mb-16 px-16 pt-4 pb-16 border-2 rounded ">
+                <span className="collapseable-headline clickable" onClick={() => setGuideCollapsed(!guideCollapsed)}>
                     <img
                         src='/images/left-arrow-angle-svgrepo-com.svg'
                         alt={(guideCollapsed ? "Expand" : "Collapse")}
                         className={"collapse-button " + (guideCollapsed ? "right" : "down")}
-                        onClick={() => setGuideCollapsed(!guideCollapsed)}>
+                    // onClick={() => setGuideCollapsed(!guideCollapsed)}
+                    >
                     </img>
-                    <h3>Get started</h3>
-                </div>
-                <ol className={guideCollapsed ? "collapse" : ""}>
+                    <h3 className='clickable'>Get started</h3>
+                </span>
+                <ol className={(guideCollapsed ? "collapse " : " ") + "list-decimal"}>
                     <li>Copy this project from Github.</li>
                     <li>In a terminal in the project directory, install Python dependencies and enter the virtual environment.</li>
                     <div className="code-block">
                         <p>$ pipenv install</p>
                         <p>$ pipenv shell</p>
                     </div>
-                    <li>Create the database and optionally seed it with random data.</li>
+                    <li>Create the database</li>
                     <div className="code-block">
                         <p>$ cd server</p>
                         <p>server$ flask db init</p>
@@ -65,11 +64,11 @@ function About() {
                     <div className="code-block">
                         <p>server$ python seed.py</p>
                     </div>
-                    <li>To start the server:</li>
+                    <li>Start the server:</li>
                     <div className="code-block">
                         <p>server$ python app.y</p>
                     </div>
-                    <li>To quickly delete the databse and create a new one:</li>
+                    <li>To quickly delete the databse and create a new one (it's easier than migrating):</li>
                     <div className="code-block">
                         <p>server$ chmod +x new-db.sh</p>
                         <p>server$ ./new-db.sh</p>
@@ -81,13 +80,11 @@ function About() {
                         <p>client$ npm install</p>
                         <p>client$ npm run start</p>
                     </div>
-                    <li>To use Tailwind CSS, it is suggested to work in VS Code with the extension Tailwind CSS Intellisense.</li>
-                    <li>The database and object mapping are programmed in server/models.py</li>
-                    <li>The API is programmed in server/app.py</li>
+                    <li>If utilizing Tailwind CSS, it is suggested to work in VS Code with the extension Tailwind CSS Intellisense.</li>
                 </ol>
 
             </div>
-        </div>
+        </div >
     );
 }
 

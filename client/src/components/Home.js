@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import "./Home.css";
+import React from "react";
 import Appointments from "./Appointments"
+import "./Home.css";
 
 function Home({ commonProps }) {
 

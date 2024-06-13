@@ -17,3 +17,13 @@ form {
     padding-top: 50px;
     margin-top: 50px;
 }
+
+#unauthorized-message-container {
+    color: red;
+    margin: auto;
+}
+
+#unauthorized-message-container > button {
+    color: white;
+    margin: auto;
+}

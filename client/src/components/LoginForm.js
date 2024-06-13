@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik'
 import "./LoginForm.css"
 
-function LoginForm({ commonProps, login, logout }) {
+function LoginForm({ commonProps, login }) {
     const [loggingIn, setLoggingIn] = useState(true)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -72,21 +72,14 @@ function LoginForm({ commonProps, login, logout }) {
 
                 <label htmlFor="password">Password:</label>
                 <input
-                    type="text"
+                    type="password"
                     name="password"
                     onChange={formikLogin.handleChange}
                     value={formikLogin.values.password}
                 />
             </div>
             <br></br>
-            {/* <label htmlFor="email">Email (not required):</label>
-        <input
-            type="text"
-            name="email"
-            onChange={formikLogin.handleChange}
-            value={formikLogin.values.email}
-        />
-        <br></br> */}
+
             <div >
 
                 <input className='submit button clickable' type="submit" value="Login" />
@@ -120,7 +113,7 @@ function LoginForm({ commonProps, login, logout }) {
 
                 <label htmlFor="password">Password:</label>
                 <input
-                    type="text"
+                    type="password"
                     name="password"
                     onChange={formikSignUp.handleChange}
                     value={formikSignUp.values.password}
@@ -154,8 +147,8 @@ function LoginForm({ commonProps, login, logout }) {
                 {loggingIn
                     ?
                     <div className="login-or-sign-up-selection">
-                        <div className="inactive clickable">
-                            <p onClick={(e) => setLoggingIn(false)}>Sign up</p>
+                        <div className="inactive clickable" onClick={(e) => setLoggingIn(false)}>
+                            <p >Sign up</p>
                         </div>
                         <div>
                             <p >Login</p>
@@ -166,8 +159,8 @@ function LoginForm({ commonProps, login, logout }) {
                         <div>
                             <p >Sign up</p>
                         </div>
-                        <div className="inactive clickable">
-                            <p onClick={(e) => setLoggingIn(true)}>Login</p>
+                        <div className="inactive clickable" onClick={(e) => setLoggingIn(true)}>
+                            <p >Login</p>
                         </div>
                     </div>
                 }

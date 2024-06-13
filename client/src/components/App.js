@@ -12,11 +12,12 @@ const websiteURL = "http://127.0.0.1:3000"
 const blankUser = {
   username: "",
   id: 0,
+  tokenIsExpired: false,
 }
-
 
 function App() {
 
+  // JWT is stored in local storage
   const getAccessToken = () => {
     const authJWTString = localStorage.getItem('access_token')
     return authJWTString
@@ -26,6 +27,7 @@ function App() {
     localStorage.setItem('access_token', x)
   }
 
+  // user object is stored in local storage
   function getLocalUser() {
     const localUserString = localStorage.getItem('localUser');
     if (localUserString) {
@@ -37,42 +39,36 @@ function App() {
     }
   }
 
+  function setLocalUser(user) {
+    localStorage.setItem('localUser', JSON.stringify({ ...user }))
+  }
+
   const [user, setUser] = useState(getLocalUser)
 
-  function setLocalUser(user) {
-    const localUser = {
-      username: user.username,
-      id: user.id
-    }
-    localStorage.setItem('localUser', JSON.stringify(localUser))
+  // call this function when a fetch request comes back with {msg: 'Token has expired'}
+  function handleExpiredTokenMessage() {
+    setUser((prev) => { return { ...prev, tokenIsExpired: true } })
   }
 
   function login(data) {
     setLocalUser(data.user)
     setAccessToken(data.access_token)
-    setUser(data.user)
+    setUser({ ...data.user, tokenIsExpired: false })
   }
 
   function logout() {
+    localStorage.removeItem('access_token')
     setLocalUser(blankUser)
     setUser(getLocalUser())
-    localStorage.removeItem('access_token')
     window.location.reload()
   }
 
-
-
-  function handleUnauthorizedResponse() {
-    //this function should be called whenever the user is logged in and gets unauthorized response (401) from the server
-
-  }
-
-  // When App.js mounts, retrieve the user from local storage 
-  // If a user is retrieved, set the user state
+  // When App.js mounts, retrieve user object from local storage 
   useEffect(() => {
     const localUser = getLocalUser()
     console.log('Local user is ')
     console.log(localUser)
+    // If a user is retrieved, set the user state
     if (localUser?.id > 0) {
       setUser(localUser)
     }
@@ -83,10 +79,12 @@ function App() {
     serverURL: serverURL,
     websiteURL: websiteURL,
     user: user,
+    logout: logout,
     getAccessToken: getAccessToken,
+    handleExpiredTokenMessage: handleExpiredTokenMessage,
   }
 
-  // Define the React router
+  // Define the React router parameters
   const router = createBrowserRouter([
     {
       path: "/",
@@ -94,13 +92,8 @@ function App() {
       children: [],
     },
     {
-      path: "/appointments",
-      element: <Appointments commonProps={commonProps} />,
-      children: [],
-    },
-    {
       path: "/login",
-      element: <Login commonProps={commonProps} login={login} logout={logout} />,
+      element: <Login commonProps={commonProps} login={login} />,
       children: [],
     },
     {
@@ -115,7 +108,9 @@ function App() {
   return (
     <div id="app">
       <Header commonProps={commonProps} logout={logout} />
+
       <RouterProvider router={router} />
+      <div id='footer'></div>
     </div>
   );
 }

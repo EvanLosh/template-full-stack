@@ -14,7 +14,7 @@
 }
 
 #login-form * {
-    background-color: white;
+    /* background-color: white; */
 
 }
 
@@ -36,6 +36,7 @@
 
 .login-or-sign-up-selection {
     display: flex;
+    font-size: 24px;
 }
 
 .login-or-sign-up-selection div {

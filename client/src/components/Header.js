@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Header.css"
 
 
-function Header({ commonProps, logout }) {
+function Header({ commonProps }) {
 
 
 
@@ -23,7 +23,7 @@ function Header({ commonProps, logout }) {
                         <a href='/about' className="text-white hover:text-gray-300"><p>About</p></a>
                         {
                             commonProps.user.id > 0 ?
-                                <p onClick={logout} className="text-white hover:text-gray-300 clickable">Logout</p>
+                                <p onClick={commonProps.logout} className="text-white hover:text-gray-300 clickable">Logout</p>
                                 :
                                 <a href='/login' className="text-white hover:text-gray-300"><p>Login</p></a>
                         }
