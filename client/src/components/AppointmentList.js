@@ -15,6 +15,7 @@ function AppointmentList({ commonProps, appointments }) {
     })
     const [hideSearch, setHideSearch] = useState(true)
 
+
     // The search input values are not stored in a react state. If they were, this component would rerender upon every change of the input values, and the array of appointments would be filtered and sorted every time. Instead, the user must press a button to filter appointments. 
     const appointmentCards = appointments.filter((a) => {
         return (
@@ -73,40 +74,53 @@ function AppointmentList({ commonProps, appointments }) {
     }
 
     return (
-        <div id="appointment-list">
-            <h1>Table of Appointments</h1>
-            <form onSubmit={handleSearchSubmit}>
+        <div id="appointment-list" className="m-auto">
+            <h3 className="m-16">Table of Appointments</h3>
+            <form id="filter-appointments-form" className="bg-white" onSubmit={handleSearchSubmit}>
                 <button className="button" onClick={() => setHideSearch(!hideSearch)}>{hideSearch ? "Show search criteria" : "Hide search criteria"}</button>
                 <div className={hideSearch ? 'hidden' : ''}>
-                    <label>Patient name</label>
-                    <input name='patientName'></input>
-                    <label>Patient DOB</label>
-                    <input name='patientDOB'></input>
-                    <label>Appointment datetime</label>
-                    <input name='appointment_datetime'></input>
-                    <label>Provider</label>
-                    <input name='providerName'></input>
-                    <label>Location</label>
-                    <input name='location'></input>
-                    <label>Status</label>
-                    <input name='status'></input>
+                    <div className="form-line flex">
+
+                        <label>Patient name:</label>
+                        <input name='patientName'></input>
+                    </div>
+                    <div className="form-line flex">
+                        <label>Patient DOB:</label>
+                        <input name='patientDOB'></input>
+                    </div>
+                    <div className="form-line flex">
+                        <label>Appointment datetime:</label>
+                        <input name='appointment_datetime'></input>
+                    </div>
+                    <div className="form-line flex">
+                        <label>Provider:</label>
+                        <input name='providerName'></input>
+                    </div>
+                    <div className="form-line flex">
+                        <label>Location:</label>
+                        <input name='location'></input>
+                    </div>
+                    <div className="form-line flex">
+                        <label>Status:</label>
+                        <input name='status'></input>
+                    </div>
                     <input type='submit' className='clickable button' value='Apply search criteria'></input>
                 </div>
 
                 <p>Found {appointmentCards.length} matching results</p>
             </form>
 
-            <p>Click on any column header to sort the table by that column</p>
+            <p className="text-center">Click on any column header to sort the table by that column</p>
             <div className='block w-full overflow-x-auto'>
 
-                <table>
+                <table className="m-auto">
                     <tr>
-                        <th className='clickable' onClick={() => handleSort('patientName')}>Patient Name</th>
-                        <th className='clickable' onClick={() => handleSort('patientDOB')}>Patient DOB</th>
-                        <th className='clickable' onClick={() => handleSort('appointment_datetime')}>Appointment Datetime</th>
-                        <th className='clickable' onClick={() => handleSort('providerName')}>Provider Name</th>
-                        <th className='clickable' onClick={() => handleSort('location')}>Appointment Location</th>
-                        <th className='clickable' onClick={() => handleSort('status')}>Status</th>
+                        <th className='clickable text-white bg-blue-500 border-black' onClick={() => handleSort('patientName')}>Patient Name</th>
+                        <th className='clickable text-white bg-blue-500 border-black' onClick={() => handleSort('patientDOB')}>Patient DOB</th>
+                        <th className='clickable text-white bg-blue-500 border-black' onClick={() => handleSort('appointment_datetime')}>Appointment Datetime</th>
+                        <th className='clickable text-white bg-blue-500 border-black' onClick={() => handleSort('providerName')}>Provider Name</th>
+                        <th className='clickable text-white bg-blue-500 border-black' onClick={() => handleSort('location')}>Appointment Location</th>
+                        <th className='clickable text-white bg-blue-500 border-black' onClick={() => handleSort('status')}>Status</th>
                     </tr>
                     {appointmentCards}
                     { }

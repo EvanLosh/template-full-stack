@@ -1,7 +1,4 @@
-table {
-    margin: auto;
-    width: 1000px;
-}
+
 
 form {
     margin: auto;
@@ -12,11 +9,11 @@ form {
     margin-bottom: 20px;
 }
 
-#appointment-list {
+/* #appointment-list {
     border-top: solid;
     padding-top: 50px;
     margin-top: 50px;
-}
+} */
 
 #unauthorized-message-container {
     color: red;

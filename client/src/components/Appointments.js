@@ -41,9 +41,10 @@ function Appointments({ commonProps }) {
     )
 
     return (
-        <div >
+        <div className="w-3/4 m-auto my-24">
             <AppointmentList commonProps={commonProps} appointments={appointments} />
-            <div id='unauthorized-message-container'>
+            <div id='unauthorized-message-container'
+                className="text-center">
 
                 {commonProps.user.id > 0 ? null : <h3>You are not logged in</h3>}
                 {commonProps.user.tokenIsExpired

@@ -63,6 +63,8 @@ class UsersResource(Resource):
         # create a new user
         try:
             form_data = request.get_json()
+            if bool(User.query.filter_by(username=form_data['username']).first()):
+                return {"message": "That username is not available"}, 200
             password = form_data['password']
             password_bytes = password.encode('utf-8')
             salt = bcrypt.gensalt()
@@ -72,7 +74,7 @@ class UsersResource(Resource):
             db.session.commit()
             return new_user.to_dict(), 201
         except:
-            return {"errors": "Failed to add new user to the database"}, 500
+            return {"message": "Failed to add new user to the database"}, 500
 
 
 class ProvidersResource(Resource):

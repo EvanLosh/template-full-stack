@@ -15,50 +15,19 @@
     }
 }
 
-#fancy-css-example-container {
-    width: 50%;
-    height: 300px;
-    background: linear-gradient(#e66465, #9198e5);
-    position: relative;
+#welcome-message a {
+    display: flex;
 }
 
-#mask {
-    width: 100%;
-    height: 100%;
-    /* -webkit-mask-image: radial-gradient(circle at 100px, #00000000, #000000 50px, #000000 75px);
-    mask-image: radial-gradient(circle at 100px, #00000000, #000000 50px, #000000 75px); */
-    position:absolute;
-    top: 0;
-    left: 0;
-    background: linear-gradient(to right, black, transparent);
+#welcome-web-developer {
+    font-family: "Dancing Script", cursive;
+    /* transform: translatex(16%);
+    scale: 160%; */
 }
 
-#masked {
-    width: 8000px;
-    height: 100%;
-    position: relative;
-    left: -4000px;
-    background-image: url('../../public/images/hamburger-svgrepo-com.svg');
-    background-repeat: repeat-x;
-    background-size: 0.6%;
-    animation: slideRight 2s linear infinite;
-    -webkit-mask-image:radial-gradient(circle at 100px, #00000000, #000000 50px, #000000 75px);
-    mask-image: radial-gradient(circle at 100px, #00000000, #000000 50px, #000000 75px);
-    mask-mode: alpha;
-}
-
-#css-blurry {
-    justify-content: center;
-    align-items: center;
-    font-size: 100px;
-    color: orange;
-    rotate: 0.95turn;
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
-    filter: blur(5px);
-    /* width: 100px;
-    height: 100px; */
-    background-color: #cccccc00;
+#welcome-message img {
+transform: rotate(180deg) translateY(0px);
+height: 36px;
+padding: 8px;
+margin-right: 10px;
 }

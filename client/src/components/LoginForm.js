@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik'
 import "./LoginForm.css"
 
 function LoginForm({ commonProps, login }) {
     const [loggingIn, setLoggingIn] = useState(true)
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [createdANewUser, setCreatedANewUser] = useState(false)
-
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [createdANewUser, setCreatedANewUser] = useState(false)
+    // const classNameFormLine = "flex"
     const initialValues = { username: "", password: "" }
+    const [responseMessage, setResponseMessage] = useState('')
 
-    // const login = (e) => {
-    //     e.preventDefault();
-    //     // Add your login logic here (e.g., API call, authentication, etc.)
-    //     console.log('Logging in with:', email, password);
-    // };
+    useEffect(() => setResponseMessage(''), [loggingIn])
 
     const formikLogin = useFormik({
         initialValues: initialValues,
@@ -28,6 +25,9 @@ function LoginForm({ commonProps, login }) {
             })
                 .then(r => r.json())
                 .then(r => {
+                    if (r.message && r.message === 'Username or password is incorrect') {
+                        setResponseMessage(r.message)
+                    }
                     console.log('Success:', r);
                     login(r)
                     formikLogin.resetForm();
@@ -49,7 +49,12 @@ function LoginForm({ commonProps, login }) {
                 .then(r => {
                     console.log('Success:', r);
                     formikSignUp.resetForm();
-                    setCreatedANewUser(true)
+                    if (r.message && r.message === 'That username is not available') {
+                        setResponseMessage(r.message)
+                    }
+                    else {
+                        setResponseMessage('Successfully created new user. You may log in.')
+                    }
                 })
         }
     })
@@ -81,20 +86,25 @@ function LoginForm({ commonProps, login }) {
             <br></br>
 
             <div >
-
+                <p className='text-red-600' id='login-sign-up-failure-message'>
+                    {responseMessage}
+                </p>
                 <input className='submit button clickable' type="submit" value="Login" />
             </div>
         </form>
     </div>
 
-    const displayLoginForm = commonProps.user.id > 0 ? <p>You are logged in</p> : loginForm
+    const displayLoginForm = commonProps.user.id > 0
+        ?
+        <div className="">
+            <p className="m-auto text-center mt-12">You are logged in as {commonProps.user.username}</p>
+            <div className="m-auto flex align-middle">
 
-    const signUpSuccessMessage =
-        createdANewUser
-            ?
-            <p id='signup-success-message'>Successfully created new user. You may login.</p>
-            :
-            null
+                <button className="clickable button m-auto my-12" onClick={commonProps.logout}>Logout</button>
+            </div>
+        </div>
+        :
+        loginForm
 
     const signUpForm = <div>
         <form onSubmit={formikSignUp.handleSubmit}>
@@ -119,8 +129,8 @@ function LoginForm({ commonProps, login }) {
                     value={formikSignUp.values.password}
                 />
             </div>
-            <br></br>
-            <div className="form-line">
+            {/* <br></br> */}
+            {/* <div className="form-line">
 
                 <label htmlFor="email">Email:</label>
                 <input
@@ -129,10 +139,13 @@ function LoginForm({ commonProps, login }) {
                     onChange={formikSignUp.handleChange}
                     value={formikSignUp.values.email}
                 />
-            </div>
+            </div> */}
             <br></br>
-            {signUpSuccessMessage}
             <div >
+
+                <p className='text-red-600' id='login-sign-up-failure-message'>
+                    {responseMessage}
+                </p>
 
                 <input className='submit button clickable' type="submit" value="Sign up" />
             </div>

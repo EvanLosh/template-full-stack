@@ -11,7 +11,7 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
    
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False, unique=True)
     password_hash = db.Column(db.String(100), nullable=False)
     datetime_created = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 

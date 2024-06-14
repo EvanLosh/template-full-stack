@@ -3,9 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home";
 import "./App.css";
 import Header from "./Header";
+import Footer from "./Footer";
 import Login from "./Login";
 import About from "./About";
 import Appointments from "./Appointments";
+
 
 const serverURL = "http://127.0.0.1:5000";
 const websiteURL = "http://127.0.0.1:3000"
@@ -92,6 +94,11 @@ function App() {
       children: [],
     },
     {
+      path: "/view-appointments",
+      element: <Appointments commonProps={commonProps} />,
+      children: [],
+    },
+    {
       path: "/login",
       element: <Login commonProps={commonProps} login={login} />,
       children: [],
@@ -104,13 +111,13 @@ function App() {
 
   ]);
 
-
   return (
     <div id="app">
       <Header commonProps={commonProps} logout={logout} />
-
-      <RouterProvider router={router} />
-      <div id='footer'></div>
+      <div id="app-content" className="">
+        <RouterProvider router={router} />
+      </div>
+      <Footer commonProps={commonProps} />
     </div>
   );
 }
