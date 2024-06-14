@@ -19,6 +19,10 @@
     display: flex;
 }
 
+#welcome-message {
+    max-width: 880px;
+}
+
 #welcome-web-developer {
     font-family: "Dancing Script", cursive;
     /* transform: translatex(16%);

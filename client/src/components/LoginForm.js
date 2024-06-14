@@ -99,7 +99,6 @@ function LoginForm({ commonProps, login }) {
         <div className="">
             <p className="m-auto text-center mt-12">You are logged in as {commonProps.user.username}</p>
             <div className="m-auto flex align-middle">
-
                 <button className="clickable button m-auto my-12" onClick={commonProps.logout}>Logout</button>
             </div>
         </div>

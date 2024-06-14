@@ -1,23 +1,33 @@
 from flask import Flask, jsonify, request, make_response, session
-# from flask_session import Session
 from flask_migrate import Migrate
 from flask_restful import Resource, Api
 from models import User, db, Patient, Appointment, Provider
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-# from flask_jwt import jwt_required, current_identity, JWT
-# import requests
 from datetime import datetime
 import bcrypt
 import werkzeug
 from werkzeug import security
+from werkzeug.middleware.proxy_fix import ProxyFix
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
+# from flask_jwt import jwt_required, current_identity, JWT
+# import requests
+# from flask_session import Session
 # import jwt as pyjwt
 
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
-# app.config["JWT_HEADER_TYPE"] = "JWT"
+# ===========================================================================
+# FOR PRODUCTION ONLY: "Tell Flask that it is behind a proxy.
+# Set the correct number of proxies that set each header. 
+# It can be a security issue if you get this configuration wrong."
+# ===========================================================================
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
+# ===========================================================================
+
 jwt = JWTManager(app)
 api = Api(app)
 cors = CORS(app, resources={r'/*': {"origins": "*"}})
@@ -25,9 +35,7 @@ cors = CORS(app, resources={r'/*': {"origins": "*"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 # configure flag to disable modification tracking and use less memory
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# create a Migrate object to manage schema modifications
 migrate = Migrate(app, db)
-# initialize the Flask application to use the database
 db.init_app(app)
 
 # def generate_jwt(user):
