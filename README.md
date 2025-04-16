@@ -31,14 +31,7 @@ The React front-end includes
 
 # To run this application locally
 
-In the client directory, run 
-
-```
-    $client npm install
-    $client npm run start
-```
-
-In another terminal the project directory, run
+Open a terminal and cd to the project directory. Enter these commands to run the back-end:
 
 ```
     $ pipenv install
@@ -51,8 +44,15 @@ In another terminal the project directory, run
     /server$ python app.py
 ```
 
+Open another terminal and cd to the client directory. Enter these commands to run the front-end: 
+
+```
+    /client$ npm install
+    /client$ npm run start
+```
+
 # Begin coding
 
-* To code the structure and relationships of the database tables, edit server/models.py
-* To code the API, edit server/app.py
-* To code React components, work in client/src/components
+* The ORM is coded in /server/models.py
+* The API is coded in /server/app.py
+* React components are located in /client/src/components
