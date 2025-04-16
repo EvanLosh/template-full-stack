@@ -20,6 +20,15 @@ The React front-end includes
 * The table can be sorted and filtered
 * Tailwind CSS
 
+# Starting a new project
+
+1. Download the files of this repo as a .zip
+2. On github.com, create a new repo
+3. Unzip the download
+4. On github.com, Upload the contents of template-full-stack/ to the new repo and commit
+5. Clone the new repo to your local machine
+
+
 # To run this application locally
 
 In the client directory, run 
